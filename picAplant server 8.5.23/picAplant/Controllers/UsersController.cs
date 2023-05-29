@@ -12,6 +12,42 @@ namespace UniServer.Controllers
     {
 
 
+        // GET api/<UsersController>/5
+        [HttpGet("/GetProduct")]
+        public object GetProduct()
+        {
+            User user = new User();
+            return user.readAllProduct();
+
+        }
+
+        [HttpGet("/getProductsByUserId/{id}")]
+        public object ProductsByUserId(int id)
+        {
+            User user = new User();
+            return user.readAllProductsByUserId(id);
+
+        }
+
+
+        [HttpPost("/InsertProductToUser")]
+        public IActionResult InsertProductToUser(int userId, int productId)
+        {
+            User user = new User();
+
+            int res = user.InsertProductToUser(userId, productId);
+            if (res == -1)
+            {
+                return NotFound("user not exist from put controller");
+            }
+            else
+            {
+                return Ok("successed");
+            }
+        }
+
+
+
 
         // GET api/<UsersController>/5
         [HttpGet("/getIdentifiedUser/{id}")]
@@ -21,7 +57,8 @@ namespace UniServer.Controllers
             return user.readAllIdentificationByUserId(id);
 
         }
-
+        
+        //adssadsada ssss 
         // GET api/<UsersController>/5
         [HttpGet("/getForumUser/{id}")]
         public object GetForumUserIf(int id)

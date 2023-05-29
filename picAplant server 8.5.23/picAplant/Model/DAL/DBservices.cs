@@ -592,6 +592,68 @@ namespace UniServer.Models.DAL
 
         }
 
+        
+        //Dor
+        // --------------------------------------------------------------------------------------------------
+        // This method reads all Product by UserId
+        // --------------------------------------------------------------------------------------------------
+        public object readAllProductsByUserId(int id)
+        {
+
+            SqlConnection con;
+            SqlCommand cmd;
+
+            try
+            {
+                con = connect("myProjDB"); // create the connection
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            cmd = CreateCommandWithSPReadSpecificId("spReturnProductsByUserId", con,id);             // create the command
+
+            List<object> list = new List<object>();
+
+            try
+            {
+
+                SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (dataReader.Read())
+                {
+                    list.Add(new
+                    {
+
+                        productCoins = Convert.ToInt32(dataReader["productCoins"]),
+                        productName = dataReader["productName"].ToString(),
+                        productUri = dataReader["productUri"].ToString(),
+
+                    });
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            finally
+            {
+                if (con != null)
+                {
+                    // close the db connection
+                    con.Close();
+                }
+            }
+
+        }
+
+
+
 
         //Guy
         // --------------------------------------------------------------------------------------------------
@@ -650,6 +712,120 @@ namespace UniServer.Models.DAL
             }
 
         }
+
+        //Dor
+        //---------------------------------------------------------------------------------
+        // This method inserts Product
+        //---------------------------------------------------------------------------------
+        public int InsertProductToUser(int userId, int productId)
+        {
+
+            SqlConnection con;
+            SqlCommand cmd;
+
+            try
+            {
+                con = connect("myProjDB"); // create the connection
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            cmd = CreateCommandWithSPInsertProductToUsert("spInsertProductToUserProducts", con, userId, productId);             // create the command
+
+
+            try
+            {
+                SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                int id = -1;
+
+                while (dataReader.Read())
+                {
+                    id = Convert.ToInt32(dataReader["id"]);
+                }
+
+                return id;
+
+            }
+
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            finally
+            {
+                if (con != null)
+                {
+                    // close the db connection
+                    con.Close();
+                }
+            }
+        }
+
+
+        //Dor
+        // --------------------------------------------------------------------------------------------------
+        // This method reads all Product
+        // --------------------------------------------------------------------------------------------------
+        public object readAllProduct()
+        {
+
+            SqlConnection con;
+            SqlCommand cmd;
+
+            try
+            {
+                con = connect("myProjDB"); // create the connection
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            cmd = CreateCommandWithSPRead("spreadProducts", con);             // create the command
+
+            List<object> list = new List<object>();
+
+            try
+            {
+
+                SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                while (dataReader.Read())
+                {
+                    list.Add(new
+                    {
+
+                        productCoins = Convert.ToInt32(dataReader["productCoins"]),
+                        productName = dataReader["productName"].ToString(),
+                        productUri = dataReader["productUri"].ToString(),
+                        productId = Convert.ToInt32(dataReader["productId"]),
+                    });
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            finally
+            {
+                if (con != null)
+                {
+                    // close the db connection
+                    con.Close();
+                }
+            }
+
+        }
+
 
         //Guy
         // --------------------------------------------------------------------------------------------------
@@ -2454,6 +2630,26 @@ namespace UniServer.Models.DAL
             return cmd;
         }
 
+
+        private SqlCommand CreateCommandWithSPInsertProductToUsert(String spName, SqlConnection con, int userId, int productId)
+        {
+            SqlCommand cmd = new SqlCommand(); // create the command object
+
+            cmd.Connection = con;              // assign the connection to the command object
+
+            cmd.CommandText = spName;      // can be Select, Insert, Update, Delete 
+
+            cmd.CommandTimeout = 10;           // Time to wait for the execution' The default is 30 seconds
+
+            cmd.CommandType = System.Data.CommandType.StoredProcedure; // the type of the command, can also be stored procedure
+
+            cmd.Parameters.AddWithValue("@userId", userId);
+
+            cmd.Parameters.AddWithValue("@productId", productId);
+
+
+            return cmd;
+        }
         private SqlCommand CreateCommandWithSPInsertQuestExpert(string spName, SqlConnection con, int plantid, int ideId)
         {
             SqlCommand cmd = new SqlCommand();

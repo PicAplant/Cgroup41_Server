@@ -16,7 +16,36 @@ namespace UniServer.Models
 
 
 
+        //Dor
+        //--------------------------------------------------------------------------------------------------
+        // return all products by given user id 
+        //--------------------------------------------------------------------------------------------------
+        public object readAllProductsByUserId(int id)
+        {
+            DBservices dbs = new DBservices();
+            return dbs.readAllProductsByUserId(id);
+        }
 
+        //Dor
+        //--------------------------------------------------------------------------------------------------
+        // return all prodict 
+        //--------------------------------------------------------------------------------------------------
+        public object readAllProduct()
+        {
+            DBservices dbs = new DBservices();
+            return dbs.readAllProduct();
+        }
+
+
+        //Dor
+        //--------------------------------------------------------------------------------------------------
+        // Insert Product To User
+        //--------------------------------------------------------------------------------------------------
+        public int InsertProductToUser(int userId, int productId)
+        {
+            DBservices dbs = new DBservices();
+            return dbs.InsertProductToUser(userId, productId);
+        }
 
         //Dor
         //--------------------------------------------------------------------------------------------------
