@@ -2130,7 +2130,7 @@ namespace UniServer.Models.DAL
             paramDic.Add("@forumId", forumID);
 
 
-            cmd = CreateCommandWithStoredProcedureGeneral("sp_getAllforum", con, paramDic); // create the command
+            cmd = CreateCommandWithStoredProcedureGeneral("sp_followForum", con, paramDic); // create the command
 
             try
             {
