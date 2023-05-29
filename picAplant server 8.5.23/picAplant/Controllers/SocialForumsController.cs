@@ -19,9 +19,18 @@ namespace picAplant.Controllers
         }
 
         // POST api/<SocialForumsController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("FollowThis")]
+        public IActionResult Post(int userID,int forumID)
         {
+            int res = SocialForum.FollowThis(userID, forumID);
+            if (res==1)
+            {
+                return Ok("user " + userID + " is follow now of forum id: " + forumID);
+            }
+            else
+            {
+                return BadRequest("error from SocialForum controller---> " + " parametes: userid: " + userID + " forumid: " + forumID);
+            }
         }
 
 

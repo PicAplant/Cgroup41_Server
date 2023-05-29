@@ -22,6 +22,12 @@ namespace picAplant.Model
             DBservices db = new DBservices();
             return db.GetListOfUNforums(userID);
         }
+        static public int FollowThis(int userID,int forumid) {
+           
+            DBservices db = new DBservices();
+            return db.Followthis(userID, forumid);
+        
+        }
 
     }
 }

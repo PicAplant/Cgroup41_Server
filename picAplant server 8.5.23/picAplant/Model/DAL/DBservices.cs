@@ -2106,8 +2106,52 @@ namespace UniServer.Models.DAL
             }
         }
 
+        //Gilad
+        //--------------------------------------------------------------------------------------------------
+        // this method connect between userid and forum id 
+        //--------------------------------------------------------------------------------------------------
+        public int Followthis(int userID,int forumID)
+        {
+            SqlConnection con;
+            SqlCommand cmd;
+
+            try
+            {
+                con = connect("myProjDB"); // create the connection
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+            paramDic.Add("@userId", userID);
+            paramDic.Add("@forumId", forumID);
 
 
+            cmd = CreateCommandWithStoredProcedureGeneral("sp_getAllforum", con, paramDic); // create the command
+
+            try
+            {
+                int numEffected = cmd.ExecuteNonQuery(); // execute the command
+                return numEffected;
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            finally
+            {
+                if (con != null)
+                {
+                    // close the db connection
+                    con.Close();
+                }
+            }
+        }
         // --------------------------------------------------------------------------------------------------
         // 
         // --------------------------------------------------------------------------------------------------
