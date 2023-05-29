@@ -2039,7 +2039,7 @@ namespace UniServer.Models.DAL
 
         //Gilad
         //--------------------------------------------------------------------------------------------------
-        // 
+        // return a list of forums with the attribute yes or no if the user is follow it.
         //--------------------------------------------------------------------------------------------------
         public List<object> GetListOfUNforums(int userID)
         {
