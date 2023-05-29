@@ -1676,10 +1676,11 @@ namespace UniServer.Models.DAL
 
             try
             {
-                SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+               
 
-                if (isAdd)
+                if (isAdd && !isCoins)
                 {
+                    SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                     int Rating = -1;
                     while (dataReader.Read())
                     {
