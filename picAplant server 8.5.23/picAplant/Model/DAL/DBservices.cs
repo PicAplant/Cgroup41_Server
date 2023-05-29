@@ -2039,7 +2039,7 @@ namespace UniServer.Models.DAL
 
         //Gilad
         //--------------------------------------------------------------------------------------------------
-        // return a list of post for a specific forum by id 
+        // return a list of forums with the attribute yes or no if the user is follow it.
         //--------------------------------------------------------------------------------------------------
         public List<object> GetListOfUNforums(int userID)
         {
@@ -2106,7 +2106,10 @@ namespace UniServer.Models.DAL
             }
         }
 
-
+        //Gilad
+        //--------------------------------------------------------------------------------------------------
+        // return a list of post for a specific forum by id 
+        //--------------------------------------------------------------------------------------------------
         public List<object> GetPostBySpecificForum(int forumID)
         {
             SqlConnection con;
@@ -2318,7 +2321,59 @@ namespace UniServer.Models.DAL
 
         }
 
-        
+
+
+
+        //Gilad
+        //--------------------------------------------------------------------------------------------------
+        // this method insert new post to specific forum with user id.
+        //--------------------------------------------------------------------------------------------------
+        public int SendReplay(int userID, int postId, string content)
+        {
+            SqlConnection con;
+            SqlCommand cmd;
+
+            try
+            {
+                con = connect("myProjDB"); // create the connection
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+            paramDic.Add("@userId", userID);
+            paramDic.Add("@postId", postId);
+            paramDic.Add("@content", content);
+
+
+
+            cmd = CreateCommandWithStoredProcedureGeneral("sp_insertNewReplay", con, paramDic); // create the command
+
+            try
+            {
+                int numEffected = cmd.ExecuteNonQuery(); // execute the command
+                return numEffected;
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            finally
+            {
+                if (con != null)
+                {
+                    // close the db connection
+                    con.Close();
+                }
+            }
+
+        }
+
 
         // --------------------------------------------------------------------------------------------------
         // 

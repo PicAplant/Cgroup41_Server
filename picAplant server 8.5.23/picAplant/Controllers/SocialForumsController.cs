@@ -62,11 +62,24 @@ namespace picAplant.Controllers
                 return BadRequest("error from SocialForum controller---> " + " paremetrs by order: " + userID + " " + forumID + " " + content);
             }
         }
-        // POST api/<SocialForumsController>
         [HttpGet("GetPosts")]
-        public IActionResult Post(int forumID)
+        public IActionResult GetPosts(int forumID)
         {
             return Ok(SocialForum.ReadPostByForumId(forumID));
+        }
+
+        [HttpPost("SendReplay")]
+        public IActionResult sendReplay(int postID,int userID,string content)
+        {
+           int res = SocialForum.SendReplay(userID,postID,content);
+            if (res>=1)
+            {
+                return Ok("success, replay sent");
+            }
+            else
+            {
+                return BadRequest("error from SocialForum controller---> " + " paremetrs by order: " + userID + " " + postID + " " + content);
+            }
         }
 
     }
