@@ -33,6 +33,21 @@ namespace picAplant.Controllers
             }
         }
 
+        // POST api/<SocialForumsController>
+        [HttpPost("CreateNewForum")]
+        public IActionResult Post(int userID,string forumName,string forumDis,int photoID)
+        {
+            int res = SocialForum.CreateNewForum(userID,forumName,forumDis,photoID);
+            if (res> 1)
+            {
+                return Ok("sucsses, paremetrs by order: " + userID+" "+ forumName + " " + forumDis + " " + photoID);
+            }
+            else
+            {
+                return BadRequest("error from SocialForum controller---> " + " paremetrs by order: " + userID + " " + forumName + " " + forumDis + " " + photoID);
+            }
+        }
+
 
     }
 }

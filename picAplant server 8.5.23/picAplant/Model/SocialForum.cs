@@ -29,5 +29,11 @@ namespace picAplant.Model
         
         }
 
+        static public int CreateNewForum(int useid,string forumname,string forumdis,int photoid)
+        {
+            DBservices db = new DBservices();
+            return db.OpenForum(useid,forumname,forumdis,photoid);
+        }
+
     }
 }
