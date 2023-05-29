@@ -2284,26 +2284,6 @@ namespace UniServer.Models.DAL
         }
 
 
-        private SqlCommand Create_SP_FirstPlantofIDE(string spName, SqlConnection con, int ideID)
-            //same as row 2053
-            //
-            //
-            //
-        {
-            SqlCommand cmd = new SqlCommand(); // create the command object
-
-            cmd.Connection = con;              // assign the connection to the command object
-
-            cmd.CommandText = spName;      // can be Select, Insert, Update, Delete 
-
-            cmd.CommandTimeout = 10;           // Time to wait for the execution' The default is 30 seconds
-
-            cmd.CommandType = System.Data.CommandType.StoredProcedure; // the type of the command, can also be stored procedure
-
-            cmd.Parameters.AddWithValue("@id", ideID);
-
-            return cmd;
-        }
 
         private SqlCommand CreateCommandSP_insertQuestion(string spName, SqlConnection con, Question quest)
         {
