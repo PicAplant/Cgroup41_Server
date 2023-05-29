@@ -48,6 +48,19 @@ namespace picAplant.Controllers
             }
         }
 
-
+        // POST api/<SocialForumsController>
+        [HttpPost("SendPost")]
+        public IActionResult Post(int userID, int forumID, string content)
+        {
+            int res = SocialForum.InsertNewPost(userID,forumID,content);
+            if (res >= 1)
+            {
+                return Ok("sucsses, paremetrs by order: " + userID + " " + forumID + " " + content );
+            }
+            else
+            {
+                return BadRequest("error from SocialForum controller---> " + " paremetrs by order: " + userID + " " + forumID + " " + content);
+            }
+        }
     }
 }

@@ -34,6 +34,11 @@ namespace picAplant.Model
             DBservices db = new DBservices();
             return db.OpenForum(useid,forumname,forumdis,photoid);
         }
+        static public int InsertNewPost(int userId,int forumID,string content)
+        {
+            DBservices dBservices= new DBservices();
+            return dBservices.SendPpost(userId,forumID,content);
+        }
 
     }
 }

@@ -2157,7 +2157,7 @@ namespace UniServer.Models.DAL
 
         //Gilad
         //--------------------------------------------------------------------------------------------------
-        // this method connect between userid and forum id 
+        // this method create new forum and automaticly insert post system and follow for the manger and user.( 4 things)
         //--------------------------------------------------------------------------------------------------
         public int OpenForum(int userID,string forumName,string forumDis, int photoID)
         {
@@ -2205,8 +2205,55 @@ namespace UniServer.Models.DAL
             }
         }
 
+        //Gilad
+        //--------------------------------------------------------------------------------------------------
+        // this method insert new post to specific forum with user id.
+        //--------------------------------------------------------------------------------------------------
+        public int SendPpost(int userID,int forumId,string content)
+        {
+            SqlConnection con;
+            SqlCommand cmd;
+
+            try
+            {
+                con = connect("myProjDB"); // create the connection
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+            paramDic.Add("@userId", userID);
+            paramDic.Add("@forumId", forumId);
+            paramDic.Add("@content", content);
 
 
+
+            cmd = CreateCommandWithStoredProcedureGeneral("sp_InsertNewPost", con, paramDic); // create the command
+
+            try
+            {
+                int numEffected = cmd.ExecuteNonQuery(); // execute the command
+                return numEffected;
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            finally
+            {
+                if (con != null)
+                {
+                    // close the db connection
+                    con.Close();
+                }
+            }
+
+        }
 
 
 
