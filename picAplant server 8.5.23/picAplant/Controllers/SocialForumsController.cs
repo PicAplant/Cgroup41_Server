@@ -1,0 +1,29 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using picAplant.Model;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace picAplant.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class SocialForumsController : ControllerBase
+    {
+
+
+        // GET api/<SocialForumsController>/5
+        [HttpGet("GetForumsById&Follow")]
+        public List<object> Get(int userID)
+        {
+            return SocialForum.GetForumByUseridFollowORnot(userID);
+        }
+
+        // POST api/<SocialForumsController>
+        [HttpPost]
+        public void Post([FromBody] string value)
+        {
+        }
+
+
+    }
+}

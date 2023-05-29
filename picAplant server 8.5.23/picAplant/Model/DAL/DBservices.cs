@@ -3,6 +3,7 @@ using System.Data;
 using UniServer.Model;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Xml.Linq;
 
 namespace UniServer.Models.DAL
 {
@@ -1919,6 +1920,11 @@ namespace UniServer.Models.DAL
         }
 
 
+
+        //Gilad
+        //--------------------------------------------------------------------------------------------------
+        // create bounos quest for the quiz return a list of object
+        //--------------------------------------------------------------------------------------------------
         public List<object> GetListOfBonusQuest()
         {
             SqlConnection con;
@@ -2025,6 +2031,82 @@ namespace UniServer.Models.DAL
                 }
             }
         }
+
+
+
+
+
+
+        //Gilad
+        //--------------------------------------------------------------------------------------------------
+        // 
+        //--------------------------------------------------------------------------------------------------
+        public List<object> GetListOfUNforums(int userID)
+        {
+            SqlConnection con;
+            SqlCommand cmd;
+
+            try
+            {
+                con = connect("myProjDB"); // create the connection
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+            paramDic.Add("@userid", userID);
+
+            cmd = CreateCommandWithStoredProcedureGeneral("sp_getAllforum", con, paramDic); // create the command
+
+            List<object> list = new List<object>();
+            try
+            {
+
+
+                SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+
+
+                while (dataReader.Read())
+                {
+                    var Res = new
+                    {
+                        plantId = Convert.ToInt32(dataReader["socialForumId"]),
+                        plantScientificName = dataReader["socialForumCreatedAt"].ToString(),
+                        photoUri = dataReader["photoUri"].ToString(),
+                        socialForumName = dataReader["socialForumName"].ToString(),
+                        socialForumDiscription = dataReader["socialForumDiscription"].ToString(),
+                        follow = dataReader["follow"].ToString(),
+
+
+
+                    };
+                    list.Add(Res);
+
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            finally
+            {
+                if (con != null)
+                {
+                    // close the db connection
+                    con.Close();
+                }
+            }
+        }
+
+
 
         // --------------------------------------------------------------------------------------------------
         // 
@@ -2402,6 +2484,38 @@ namespace UniServer.Models.DAL
             cmd.Parameters.AddWithValue("@questionsForExpertsId", QuestId);
             cmd.Parameters.AddWithValue("@userId", userid);
             cmd.Parameters.AddWithValue("@questionsForExpertsAnswer", answer);
+
+            return cmd;
+        }
+
+
+
+
+        //Gilad
+        // --------------------------------------------------------------------------------------------------
+        // This method is a General method which create command with sp 
+        // --------------------------------------------------------------------------------------------------
+
+        private SqlCommand CreateCommandWithStoredProcedureGeneral(String spName, SqlConnection con, Dictionary<string, object> paramDic)
+        {
+
+            SqlCommand cmd = new SqlCommand(); // create the command object
+
+            cmd.Connection = con;              // assign the connection to the command object
+
+            cmd.CommandText = spName;      // can be Select, Insert, Update, Delete 
+
+            cmd.CommandTimeout = 10;           // Time to wait for the execution' The default is 30 seconds
+
+            cmd.CommandType = System.Data.CommandType.StoredProcedure; // the type of the command, can also be text
+
+            if (paramDic != null)
+                foreach (KeyValuePair<string, object> param in paramDic)
+                {
+                    cmd.Parameters.AddWithValue(param.Key, param.Value);
+
+                }
+
 
             return cmd;
         }
