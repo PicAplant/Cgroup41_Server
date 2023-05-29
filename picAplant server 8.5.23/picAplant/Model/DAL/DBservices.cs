@@ -2074,8 +2074,8 @@ namespace UniServer.Models.DAL
                 {
                     var Res = new
                     {
-                        plantId = Convert.ToInt32(dataReader["socialForumId"]),
-                        plantScientificName = dataReader["socialForumCreatedAt"].ToString(),
+                        socialForumId = Convert.ToInt32(dataReader["socialForumId"]),
+                        socialForumCreatedAt = dataReader["socialForumCreatedAt"].ToString(),
                         photoUri = dataReader["photoUri"].ToString(),
                         socialForumName = dataReader["socialForumName"].ToString(),
                         socialForumDiscription = dataReader["socialForumDiscription"].ToString(),
