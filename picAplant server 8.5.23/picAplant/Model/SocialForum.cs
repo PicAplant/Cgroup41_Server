@@ -40,5 +40,11 @@ namespace picAplant.Model
             return dBservices.SendPpost(userId,forumID,content);
         }
 
+        static public List<object> ReadPostByForumId(int forumId)
+        {
+            DBservices dBservices= new DBservices();
+            return dBservices.GetPostBySpecificForum(forumId);
+        }
+
     }
 }

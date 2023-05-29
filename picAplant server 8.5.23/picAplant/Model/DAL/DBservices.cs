@@ -2039,7 +2039,7 @@ namespace UniServer.Models.DAL
 
         //Gilad
         //--------------------------------------------------------------------------------------------------
-        // return a list of forums with the attribute yes or no if the user is follow it.
+        // return a list of post for a specific forum by id 
         //--------------------------------------------------------------------------------------------------
         public List<object> GetListOfUNforums(int userID)
         {
@@ -2083,6 +2083,67 @@ namespace UniServer.Models.DAL
 
 
 
+                    };
+                    list.Add(Res);
+
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            finally
+            {
+                if (con != null)
+                {
+                    // close the db connection
+                    con.Close();
+                }
+            }
+        }
+
+
+        public List<object> GetPostBySpecificForum(int forumID)
+        {
+            SqlConnection con;
+            SqlCommand cmd;
+
+            try
+            {
+                con = connect("myProjDB"); // create the connection
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+            paramDic.Add("@forumId", forumID);
+
+            cmd = CreateCommandWithStoredProcedureGeneral("sp_GetAllPostByForumId", con, paramDic); // create the command
+
+            List<object> list = new List<object>();
+            try
+            {
+
+
+                SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+
+
+                while (dataReader.Read())
+                {
+                    var Res = new
+                    {
+                        postId = Convert.ToInt32(dataReader["postId"]),
+                        postContent = dataReader["postContent"].ToString(),
+                        postUpload = dataReader["postUpload"].ToString(),
+                        userId = Convert.ToInt32(dataReader["userId"]),
                     };
                     list.Add(Res);
 
@@ -2153,6 +2214,8 @@ namespace UniServer.Models.DAL
             }
         }
 
+
+      
 
 
         //Gilad
@@ -2255,7 +2318,7 @@ namespace UniServer.Models.DAL
 
         }
 
-
+        
 
         // --------------------------------------------------------------------------------------------------
         // 

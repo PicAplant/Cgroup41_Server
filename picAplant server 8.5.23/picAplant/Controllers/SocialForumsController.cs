@@ -62,5 +62,12 @@ namespace picAplant.Controllers
                 return BadRequest("error from SocialForum controller---> " + " paremetrs by order: " + userID + " " + forumID + " " + content);
             }
         }
+        // POST api/<SocialForumsController>
+        [HttpGet("GetPosts")]
+        public IActionResult Post(int forumID)
+        {
+            return Ok(SocialForum.ReadPostByForumId(forumID));
+        }
+
     }
 }
