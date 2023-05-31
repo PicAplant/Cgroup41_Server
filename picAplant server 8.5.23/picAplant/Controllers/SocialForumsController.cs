@@ -68,6 +68,12 @@ namespace picAplant.Controllers
             return Ok(SocialForum.ReadPostByForumId(forumID));
         }
 
+        [HttpGet("GetReplays")]
+        public IActionResult GetReplays(int PostID)
+        {
+            return Ok(SocialForum.ReadReplayByPostId(PostID));
+        }
+
         [HttpPost("SendReplay")]
         public IActionResult sendReplay(int postID,int userID,string content)
         {

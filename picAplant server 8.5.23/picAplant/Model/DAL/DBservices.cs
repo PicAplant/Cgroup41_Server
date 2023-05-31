@@ -2323,6 +2323,76 @@ namespace UniServer.Models.DAL
                         postContent = dataReader["postContent"].ToString(),
                         postUpload = dataReader["postUpload"].ToString(),
                         userId = Convert.ToInt32(dataReader["userId"]),
+                        socialForumId = Convert.ToInt32(dataReader["socialForumId"]),
+
+                    };
+                    list.Add(Res);
+
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            finally
+            {
+                if (con != null)
+                {
+                    // close the db connection
+                    con.Close();
+                }
+            }
+        }
+
+
+
+        //Gilad
+        //--------------------------------------------------------------------------------------------------
+        // return a list of post for a specific forum by id 
+        //--------------------------------------------------------------------------------------------------
+        public List<object> GetReplayByPostID(int PostID)
+        {
+            SqlConnection con;
+            SqlCommand cmd;
+
+            try
+            {
+                con = connect("myProjDB"); // create the connection
+            }
+            catch (Exception ex)
+            {
+                // write to log
+                throw (ex);
+            }
+
+            Dictionary<string, object> paramDic = new Dictionary<string, object>();
+            paramDic.Add("@postId", PostID);
+
+            cmd = CreateCommandWithStoredProcedureGeneral("sp_getAllReplayByPostId", con, paramDic); // create the command
+
+            List<object> list = new List<object>();
+            try
+            {
+
+
+                SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+
+
+                while (dataReader.Read())
+                {
+                    var Res = new
+                    {
+                        replayId = Convert.ToInt32(dataReader["replayId"]),
+                        replayContent = dataReader["replayContent"].ToString(),
+                        replayTime = dataReader["replayTime"].ToString(),
+                        userId = Convert.ToInt32(dataReader["userId"]),
+                        postId = Convert.ToInt32(dataReader["postId"]),
+
                     };
                     list.Add(Res);
 
@@ -2520,9 +2590,10 @@ namespace UniServer.Models.DAL
             }
 
             Dictionary<string, object> paramDic = new Dictionary<string, object>();
+            paramDic.Add("@content", content);
             paramDic.Add("@userId", userID);
             paramDic.Add("@postId", postId);
-            paramDic.Add("@content", content);
+            
 
 
 

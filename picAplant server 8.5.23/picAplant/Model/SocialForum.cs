@@ -45,10 +45,16 @@ namespace picAplant.Model
             DBservices dBservices= new DBservices();
             return dBservices.GetPostBySpecificForum(forumId);
         }
-        static public int SendReplay(int postId ,int userId, string content)
+        static public int SendReplay(int userId, int postId , string content)
         {
             DBservices dBservices= new DBservices();
             return dBservices.SendReplay(userId,postId,content);
+        }
+
+        static public List <object> ReadReplayByPostId(int postId)
+        {
+            DBservices dBservices= new DBservices();
+            return dBservices.GetReplayByPostID(postId);
         }
     }
 }
