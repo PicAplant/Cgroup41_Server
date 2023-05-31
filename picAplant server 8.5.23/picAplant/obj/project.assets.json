@@ -680,19 +680,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dorge\\.nuget\\packages\\": {}
+    "C:\\Users\\gilad\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dorge\\OneDrive\\מסמכים\\GitHub\\Cgroup41_Server_new\\picAplant server 8.5.23\\picAplant\\picAplant.csproj",
+      "projectUniqueName": "C:\\MYFOLDER\\RUPPIN\\ProjectGit\\serverGit\\Cgroup41_Server\\picAplant server 8.5.23\\picAplant\\picAplant.csproj",
       "projectName": "picAplant",
-      "projectPath": "C:\\Users\\dorge\\OneDrive\\מסמכים\\GitHub\\Cgroup41_Server_new\\picAplant server 8.5.23\\picAplant\\picAplant.csproj",
-      "packagesPath": "C:\\Users\\dorge\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\dorge\\OneDrive\\מסמכים\\GitHub\\Cgroup41_Server_new\\picAplant server 8.5.23\\picAplant\\obj\\",
+      "projectPath": "C:\\MYFOLDER\\RUPPIN\\ProjectGit\\serverGit\\Cgroup41_Server\\picAplant server 8.5.23\\picAplant\\picAplant.csproj",
+      "packagesPath": "C:\\Users\\gilad\\.nuget\\packages\\",
+      "outputPath": "C:\\MYFOLDER\\RUPPIN\\ProjectGit\\serverGit\\Cgroup41_Server\\picAplant server 8.5.23\\picAplant\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\dorge\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\gilad\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -746,7 +746,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
