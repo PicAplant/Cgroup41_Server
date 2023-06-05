@@ -2498,8 +2498,19 @@ namespace UniServer.Models.DAL
 
             try
             {
-                int numEffected = cmd.ExecuteNonQuery(); // execute the command
-                return numEffected;
+
+                SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                int forumid = 0;
+
+                while (dataReader.Read())
+                {
+
+                     forumid = Convert.ToInt32(dataReader["id"]);
+                    
+                }
+
+                return forumid;
             }
             catch (Exception ex)
             {

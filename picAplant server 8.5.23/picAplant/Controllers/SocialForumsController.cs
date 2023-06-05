@@ -37,10 +37,10 @@ namespace picAplant.Controllers
         [HttpPost("CreateNewForum")]
         public IActionResult Post(int userID,string forumName,string forumDis,int photoID)
         {
-            int res = SocialForum.CreateNewForum(userID,forumName,forumDis,photoID);
-            if (res> 1)
+            int forumid = SocialForum.CreateNewForum(userID,forumName,forumDis,photoID);
+            if (forumid > 0)
             {
-                return Ok("sucsses, paremetrs by order: " + userID+" "+ forumName + " " + forumDis + " " + photoID);
+                return Ok("sucsses, paremetrs by order: " + userID+" "+ forumName + " " + forumDis + " " + photoID+"forumID:"+forumid);
             }
             else
             {
