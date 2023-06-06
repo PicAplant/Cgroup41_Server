@@ -2395,6 +2395,12 @@ namespace UniServer.Models.DAL
                         replayTime = dataReader["replayTime"].ToString(),
                         userId = Convert.ToInt32(dataReader["userId"]),
                         postId = Convert.ToInt32(dataReader["postId"]),
+                        photoUri = dataReader["photoUri"].ToString(),
+                        userType = dataReader["userType"].ToString(),
+                        userName = dataReader["userName"].ToString(),
+
+
+
 
                     };
                     list.Add(Res);
