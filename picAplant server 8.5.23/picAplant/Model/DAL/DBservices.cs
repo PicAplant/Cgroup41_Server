@@ -2322,9 +2322,9 @@ namespace UniServer.Models.DAL
                         postId = Convert.ToInt32(dataReader["postId"]),
                         postContent = dataReader["postContent"].ToString(),
                         postUpload = dataReader["postUpload"].ToString(),
-                        photoUri = dataReader["photoUri"].ToString(),
                         userName = dataReader["userName"].ToString(),
                         userType = dataReader["userType"].ToString(),
+                        photouri = dataReader["photouri"].ToString(),
                         userId = Convert.ToInt32(dataReader["userId"]),
                         socialForumId = Convert.ToInt32(dataReader["socialForumId"]),
 
