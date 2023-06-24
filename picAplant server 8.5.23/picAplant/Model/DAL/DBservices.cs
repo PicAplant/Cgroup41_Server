@@ -560,17 +560,18 @@ namespace UniServer.Models.DAL
             try
             {
 
+
                 SqlDataReader dataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
 
                 while (dataReader.Read())
                 {
                     list.Add(new
                     {
-
                         NumberOfParticipant = Convert.ToInt32(dataReader["numberOfUsers"]),
                         Title = dataReader["socialForumName"].ToString(),
                         Description = dataReader["socialForumDiscription"].ToString(),
-
+                        socialForumId = Convert.ToInt32(dataReader["socialForumId"]),
+                        photoUri = dataReader["photoUri"].ToString()
                     });
                 }
                 return list;
