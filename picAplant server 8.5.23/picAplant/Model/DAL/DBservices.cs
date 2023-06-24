@@ -568,10 +568,11 @@ namespace UniServer.Models.DAL
                     list.Add(new
                     {
                         NumberOfParticipant = Convert.ToInt32(dataReader["numberOfUsers"]),
-                        Title = dataReader["socialForumName"].ToString(),
-                        Description = dataReader["socialForumDiscription"].ToString(),
                         socialForumId = Convert.ToInt32(dataReader["socialForumId"]),
-                        photoUri = dataReader["photoUri"].ToString()
+                        socialForumCreatedAt = dataReader["socialForumCreatedAt"].ToString(),
+                        photoUri = dataReader["photoUri"].ToString(),
+                        socialForumName = dataReader["socialForumName"].ToString(),
+                        socialForumDiscription = dataReader["socialForumDiscription"].ToString()
                     });
                 }
                 return list;
